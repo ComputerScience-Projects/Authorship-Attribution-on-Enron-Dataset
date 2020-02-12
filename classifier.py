@@ -34,7 +34,6 @@ def vectorization(train_texts, test_texts, path, problem, language, candidate_gr
     t0 = time()
     cosine = False
 
-
     if cosine:
         # candidate_grouped_data_cs, train_data_group_cs, test_data_group_cs = std.char_single_gram(candidate_grouped_texts, train_texts, test_texts, language, True)
         candidate_grouped_data_ws, train_data_group_ws, test_data_group_ws = std.word_single_gram(candidate_grouped_texts, train_texts, test_texts, language, True)
@@ -72,7 +71,6 @@ def vectorization(train_texts, test_texts, path, problem, language, candidate_gr
     # train_data_cwg, test_data_cwg = hstack([train_data_c, train_data_w, train_data_g]), hstack([test_data_c, test_data_w, test_data_g])
     # train_data_cwg, test_data_cwg = hstack([train_data_cw, train_data_g]), hstack([test_data_cw, test_data_g])
     # print("train_data_cwg_shape:", train_data_cwg.shape, "test_data_cwg_shape:", test_data_cwg.shape)
-
 
     train_data_multi = [train_data_c, train_data_w, train_data_d, hstack([train_data_group_c, train_data_group_w])]
     test_data_multi = [test_data_c, test_data_w, test_data_d, hstack([test_data_group_c, test_data_group_w])]
@@ -334,31 +332,33 @@ def main(path, outpath, pickle_path, n=3, ft=5, pt=0.1):
     print("Valutato con k=")
 
 
-# if __name__ == '__main__':
-# base = "/Users/valerioneri/Sapienza/Projects/Authorship/"
-# base = "/home/valerioneri/PycharmProjects/cross-domain-authorship-attribution/"
-base = "/opt/projects/attribution/src/"
+base = "./"
 
-# in_path = base + "Datasets/training-dataset-2019-01-23"
-# out_path = base + "Code/baseline/my_outs"
+if __name__ == '__main__':
+    # base = "/Users/valerioneri/Sapienza/Projects/Authorship/"
+    # base = "/home/valerioneri/PycharmProjects/cross-domain-authorship-attribution/"
+    base = "/opt/projects/attribution/src/"
 
-# pickle_path = ""
-pickle_path = base + "Code/baseline/pickles"
+    # in_path = base + "Datasets/training-dataset-2019-01-23"
+    # out_path = base + "Code/baseline/my_outs"
 
-parser = argparse.ArgumentParser(description='cross domain authorship attribution')
-parser.add_argument('-i', type=str, help='Path to evaluation collection')
-parser.add_argument('-o', type=str, help='Path to output files')
-args = parser.parse_args()
+    # pickle_path = ""
+    pickle_path = base + "Code/baseline/pickles"
 
-# std.clean_dir(args.o)
+    parser = argparse.ArgumentParser(description='cross domain authorship attribution')
+    parser.add_argument('-i', type=str, help='Path to evaluation collection')
+    parser.add_argument('-o', type=str, help='Path to output files')
+    args = parser.parse_args()
 
-print("path", args.i + os.sep)
+    # std.clean_dir(args.o)
 
-t0 = time()
-main(args.i + os.sep, args.o + os.sep, pickle_path)
-t1 = time() - t0
+    print("path", args.i + os.sep)
 
-if not PAN:
-    valuta(base, mine=True)
+    t0 = time()
+    main(args.i + os.sep, args.o + os.sep, pickle_path)
+    t1 = time() - t0
 
-print("Total Time:", t1)
+    if not PAN:
+        valuta(base, mine=True)
+
+    print("Total Time:", t1)

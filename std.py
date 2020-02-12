@@ -227,7 +227,7 @@ def save_output(path, problem, unk_folder, predictions, outpath, proba):
 
 
 def do_vocabulary(base, problem, train_docs, n, ft, use_stored=False, Store=True):
-    filename = base + os.sep + "Code/baseline/pickles" + os.sep + problem + '_vocabulary.pickle'
+    filename = base + os.sep + "/baseline/pickles" + os.sep + problem + '_vocabulary.pickle'
 
     if use_stored and os.path.isfile(filename):
         vocabulary = pickle.load(open(filename, "rb"))['v']
@@ -294,12 +294,12 @@ def picke_store(pickle_name, train_docs, train_texts, train_labels, test_texts):
 
 
 def save_dict_into_pickle(d, filename, base, problem):
-    filename = base + os.sep + "Code/baseline/pickles/word_vectorizer_" + problem + filename + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/word_vectorizer_" + problem + filename + '.pickle'
     pickle.dump(d, open(filename, "wb"))
 
 
 def load_dict_into_pickle(filename, base, problem):
-    filename = base + os.sep + "Code/baseline/pickles/word_vectorizer_" + problem + filename + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/word_vectorizer_" + problem + filename + '.pickle'
     return pickle.load(open(filename, "rb"))
 
 
@@ -446,7 +446,7 @@ def word_single_gram(candidate_grouped_texts, train_texts, test_texts, language,
 
 def char_single_gram_dist(base, problem, candidate_grouped_texts, train_texts, test_texts, language, base_name="dist_", use_stored=False,
                           Store=True):
-    filename = base + os.sep + "Code/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
 
     if use_stored and os.path.isfile(filename):
         d = pickle.load(open(filename, "rb"))
@@ -590,7 +590,7 @@ def compression(base, problem, united_texts, train_texts, test_texts, language, 
 
 
 def char_gram(base, problem, train_texts, test_texts, language, base_name="", gram_range=(3, 5), f=None, use_stored=False, Store=True):
-    filename = base + os.sep + "Code/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
 
     if use_stored and os.path.isfile(filename):
         d = pickle.load(open(filename, "rb"))
@@ -600,8 +600,8 @@ def char_gram(base, problem, train_texts, test_texts, language, base_name="", gr
     else:
 
         if f is not None:
-            train_texts = f(train_texts, language, base + os.sep + "Code/baseline/pickles/train_" + problem)
-            test_texts = f(test_texts, language, base + os.sep + "Code/baseline/pickles/test_" + problem)
+            train_texts = f(train_texts, language, base + os.sep + "/baseline/pickles/train_" + problem)
+            test_texts = f(test_texts, language, base + os.sep + "/baseline/pickles/test_" + problem)
 
         print("text analysis", len(train_texts), len(train_texts[0]), type(train_texts[0]))
 
@@ -618,7 +618,7 @@ def char_gram(base, problem, train_texts, test_texts, language, base_name="", gr
 
 def char_gram_dist(base, problem, train_texts, test_texts, language, base_name="dist_", use_stored=False,
                    Store=True):
-    filename = base + os.sep + "Code/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/char_vectorizer_" + base_name + problem + '.pickle'
 
     if use_stored and os.path.isfile(filename):
         d = pickle.load(open(filename, "rb"))
@@ -652,7 +652,7 @@ def char_gram_dist(base, problem, train_texts, test_texts, language, base_name="
 
 def word_gram(base, problem, train_texts, test_texts, language, grange=(1, 3), f=None, base_name="word_", use_stored=False,
               Store=True, span=2, stem=True, phone=False, notokenizer=True):
-    filename = base + os.sep + "Code/baseline/pickles/word_vectorizer_" + base_name + problem + '.pickle'
+    filename = base + os.sep + "/baseline/pickles/word_vectorizer_" + base_name + problem + '.pickle'
 
     if use_stored and os.path.isfile(filename):
         d = pickle.load(open(filename, "rb"))
@@ -669,8 +669,8 @@ def word_gram(base, problem, train_texts, test_texts, language, grange=(1, 3), f
         # stop_words=stopwords.words(language),
 
         if f is not None:
-            train_texts = f(train_texts, language, base + os.sep + "Code/baseline/pickles/train_" + problem)
-            test_texts = f(test_texts, language, base + os.sep + "Code/baseline/pickles/test_" + problem)
+            train_texts = f(train_texts, language, base + os.sep + "/baseline/pickles/train_" + problem)
+            test_texts = f(test_texts, language, base + os.sep + "/baseline/pickles/test_" + problem)
 
         elif stem:
             stemmer = SnowballStemmer(language)
@@ -1062,7 +1062,7 @@ def reject_option(predictions, proba, pt, problem, language, other_things):
         sproba = sorted(proba[i], reverse=True)
         max_proba, max_proba2, max_proba3 = sorted(proba[i], reverse=True)[:3]
 
-        if sproba[0] - sproba[1] < pt and ((max_proba - max_proba2) + (max_proba2 - max_proba3)) / 2 < 0.07:
+        if False and sproba[0] - sproba[1] < pt and ((max_proba - max_proba2) + (max_proba2 - max_proba3)) / 2 < 0.07:
             #  print(sproba)
             # if sproba[0] < pt:
             # print('Confidenza massima', sproba[0], sproba[1], sproba[0] - sproba[1])
@@ -1101,7 +1101,7 @@ def media_delle_probabilita(pred1, pred2, proba1, proba2):
         average = np.average(data, axis=0)
         maxind = np.argmax(average)
 
-        prediction.append('candidate' + str(maxind + 1).zfill(5))
+        prediction.append(maxind)
         proba.append(average)
 
     return prediction, proba
@@ -1125,7 +1125,7 @@ def soft_voting(probas, weights=None):
 
     for p in proba:
         maxind = np.argmax(p)
-        prediction.append('candidate' + str(maxind + 1).zfill(5))
+        prediction.append(maxind)
 
     return [prediction], [proba]
 
@@ -1232,7 +1232,7 @@ def classifier():
         estimators=[('ada', CalibratedClassifierCV(OneVsRestClassifier(ada))), ('net', CalibratedClassifierCV(OneVsRestClassifier(NeuralNet()))),
                     ("svm", CalibratedClassifierCV(OneVsRestClassifier(svm)))],
         voting='soft', n_jobs=2)
-    clf = CalibratedClassifierCV(OneVsRestClassifier(svm))
+    clf = CalibratedClassifierCV(OneVsRestClassifier(svm), cv=3)
 
     return clf
 
