@@ -10,7 +10,7 @@ import random
 from sklearn import preprocessing
 from pathlib import Path
 from classifier import *
-from sklearn.metrics import multilabel_confusion_matrix, precision_score, accuracy_score
+from sklearn.metrics import multilabel_confusion_matrix, precision_score, accuracy_score, classification_report
 import matplotlib.pyplot as plt
 
 
@@ -80,6 +80,7 @@ def metrics(true, pred):
     print(precision_score(true, pred, average=None))
     print(precision_score(true, pred, average='micro'))
     print(accuracy_score(true, pred, normalize=False))
+    print(classification_report(true, pred))
 
 
 def evaluate_problem(texts, problem: str, language, path, pt):
@@ -129,6 +130,7 @@ def evaluate_problem(texts, problem: str, language, path, pt):
         # stats_data = std.save_output(path, problem, unk_folder, predictions, outpath, proba)
 
     print(predictions)
+    return predictions
 
 
 #
@@ -150,7 +152,7 @@ unknown_authors = le.transform(unknown_authors)
 # Run AA Classifier
 
 texts = (known_files, authors, unknown_files, known_files_grouped)
-# evaluate_problem(texts, "0", 'english', "", 0.1)
+# pred = evaluate_problem(texts, "0", 'english', "", 0.1)
 
 #
 # Metrics
@@ -158,7 +160,7 @@ texts = (known_files, authors, unknown_files, known_files_grouped)
 pred = [24, 43, 61, 0, 1, 2, 3, 4, 5, 6, 7, 8, 5, 10, 11, 12, 13, 41, 15, 16, 77, 18, 19, 69, 21, 22, 23, 25, 43, 25, 28, 52, 30, 31, 10, 33, 34, 35, 36, 37, 38, 39, 41, 37, 44, 45, 40, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 41, 52, 20, 61, 26, 63, 64, 65, 66, 67, 68, 69, 70, 24, 35, 43, 74, 37,
         76, 24, 29, 79, 40]
 
-# metrics(unknown_authors, pred)
+metrics(unknown_authors, pred)
 
 
 print(unknown_authors)
