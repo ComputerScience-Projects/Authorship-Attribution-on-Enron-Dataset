@@ -19,3 +19,6 @@ weights = {
     'italian':  None,
     'spanish':  None
 }
+
+DATASET_PATH = "./Ernon-Dataset/"
+
