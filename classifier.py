@@ -4,8 +4,8 @@ import argparse, os
 # from configuration_vars import PAN, MAX_PROBLEMS, MIN_PROBLEMS, N_CORE, MULTICORE, MULTICLASSIFIER
 # from std import scale, classifier, porbabilities_clf
 
-exit_code = os.system("bash compile.sh")
-if exit_code != 0: exit(exit_code)
+#exit_code = os.system("bash compile.sh")
+#if exit_code != 0: exit(exit_code)
 
 from time import time
 

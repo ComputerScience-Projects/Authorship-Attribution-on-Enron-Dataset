@@ -24,7 +24,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC, LinearSVC, OneClassSVM
 from tabulate import tabulate
 
-import std_c
 from sklearn.metrics.pairwise import cosine_similarity
 # from metaphone import doublemetaphone
 from configuration_vars import *
